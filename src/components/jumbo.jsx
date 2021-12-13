@@ -4,20 +4,22 @@ import { Card, Grid } from "@mui/material";
 import { Box } from "@mui/system";
 import Barchart from "./barchart";
 
-function Jumbo() {
+export default function Jumbo(props) {
   return (
     <Card>
       <Box sx={{ mx: "auto" }} mb={5} padding={5} minHeight={500}>
         <Grid container>
           <Grid item xs={12}>
             <Typography color="white" variant="h4">
-              <Box sx={{ fontWeight: "bold" }}>Total Monthly Spendings: </Box>
+              <Box sx={{ fontWeight: "bold" }}>
+                Total Monthly Spendings: ${props.spendings.thisMonth}
+              </Box>
             </Typography>
             <Typography variant="secondary" color="white">
-              Lorem, ipsum dolor.
+              Last Month: ${props.spendings.lastMonth}
             </Typography>
             <Box mt={10}>
-              <Barchart></Barchart>
+              <Barchart items={props.items}></Barchart>
             </Box>
           </Grid>
         </Grid>
@@ -25,5 +27,3 @@ function Jumbo() {
     </Card>
   );
 }
-
-export default Jumbo;

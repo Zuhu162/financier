@@ -4,8 +4,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Autocomplete from "@mui/material/Autocomplete";
 import {
   Alert,
   Card,
@@ -74,9 +73,16 @@ export default function NewItem() {
             fullWidth
             type="number"
             id="price"
-            label="price"
+            label="Price"
             name="price"
             autoFocus
+          />
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={[1, 2, 3, 4, 5]}
+            sx={{ width: 300, backgroundColor: "white" }}
+            renderInput={(params) => <TextField {...params} label="Type" />}
           />
           <Button
             onClick={handleSubmit}

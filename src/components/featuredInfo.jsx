@@ -11,7 +11,7 @@ export default function FeaturedInfo(props) {
     <div>
       <Card
         sx={{
-          bgcolor: props.value > 0 ? "#00C49F" : "secondary.main",
+          bgcolor: props.value > 0 ? "secondary.main" : "#00C49F",
           mb: 2,
           mr: 1,
         }}
