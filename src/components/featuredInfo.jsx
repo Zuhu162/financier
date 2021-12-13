@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import TagFacesIcon from "@mui/icons-material/TagFaces";
+import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -41,13 +43,13 @@ export default function FeaturedInfo(props) {
             </Typography>
           </CardContent>
           {props.value > 0 ? (
-            <ArrowUpwardIcon
+            <SentimentVeryDissatisfiedIcon
               sx={{ mt: 7, color: "white", fontSize: 50 }}
-            ></ArrowUpwardIcon>
+            ></SentimentVeryDissatisfiedIcon>
           ) : (
-            <ArrowDownwardIcon sx={{ mt: 7, color: "white", fontSize: 50 }}>
+            <TagFacesIcon sx={{ mt: 7, color: "white", fontSize: 50 }}>
               {" "}
-            </ArrowDownwardIcon>
+            </TagFacesIcon>
           )}{" "}
           <Typography sx={{ mt: 7, color: "white" }}>
             {props.percentage}

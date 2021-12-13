@@ -6,6 +6,7 @@ import FeaturedInfo from "../featuredInfo";
 import Jumbo from "../jumbo";
 import Recents from "../recents";
 import Saving from "../savings";
+import NewItem from "../newItem";
 
 function Dashboard() {
   const [utilItems, setUtilItems] = useState([
@@ -78,6 +79,9 @@ function Dashboard() {
           items={[utilItems, entertainmentItems, educationItems, miscItems]}
         ></Jumbo>
       </Grid>
+      <Grid item xs={12} md={1} mr={1}>
+        <NewItem default="One-Time"></NewItem>
+      </Grid>
       <Grid item xs={12} md={4}>
         <FeaturedInfo
           title="Total Spendings"
@@ -87,11 +91,12 @@ function Dashboard() {
       </Grid>
       <Grid item xs={12} md={4}>
         <FeaturedInfo
-          title="Extra Spendings"
+          title="One Time Spendings"
           comparedTo="Last Month"
           value="+120"
         />
       </Grid>
+
       <Grid item mr={2} xs={8}>
         <Saving></Saving>
       </Grid>

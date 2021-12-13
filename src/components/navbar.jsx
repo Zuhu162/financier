@@ -16,6 +16,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -31,15 +32,21 @@ function ResponsiveDrawer(props) {
     <div>
       <Toolbar />
       <Divider />
+
       <List sx={{ color: "white" }}>
         {["Dashboard", "Profile", "Statistics", "History"].map(
           (text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon sx={{ color: "white" }}>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
+            <Link
+              style={{ textDecoration: "none", color: "#FFF" }}
+              to={`/${text.toLowerCase()}`}
+            >
+              <ListItem button key={text}>
+                <ListItemIcon sx={{ color: "white" }}>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            </Link>
           )
         )}
       </List>

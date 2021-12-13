@@ -26,7 +26,7 @@ const style = {
   p: 4,
 };
 
-export default function NewItem() {
+export default function NewItem(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -41,7 +41,7 @@ export default function NewItem() {
           <ListItemButton onClick={handleOpen} sx={{ minHeight: "100px" }}>
             <Grid container justifyContent="center">
               <Grid item justifyContent="center">
-                <AddCircleOutlineRoundedIcon />
+                <AddCircleOutlineRoundedIcon sx={{ fontSize: 30 }} />
               </Grid>
             </Grid>
           </ListItemButton>
@@ -54,7 +54,7 @@ export default function NewItem() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography variant="h5">Add a new item</Typography>
+          <Typography variant="h5">Log New Expenditure</Typography>
           <TextField
             // onChange={(e) => setEmail(e.currentTarget.value)}
             margin="normal"
@@ -76,12 +76,14 @@ export default function NewItem() {
             label="Price"
             name="price"
             autoFocus
+            sx={{ marginBottom: "25px" }}
           />
           <Autocomplete
             disablePortal
             id="combo-box-demo"
-            options={[1, 2, 3, 4, 5]}
-            sx={{ width: 300, backgroundColor: "white" }}
+            options={["Utilities", "Entertainment", "Education", "MISC"]}
+            value={props.default}
+            sx={{ width: 300 }}
             renderInput={(params) => <TextField {...params} label="Type" />}
           />
           <Button
