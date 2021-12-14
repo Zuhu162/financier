@@ -20,24 +20,13 @@ export default function FeaturedInfo(props) {
       >
         <Box sx={{ display: "flex" }}>
           <CardContent>
-            <Typography
-              sx={{ mt: 1.5, mb: 1.5, fontSize: 14 }}
-              color="white"
-              gutterBottom
-            >
+            <Typography sx={{ mt: 1.5, mb: 1.5, fontSize: 14 }} gutterBottom>
               {props.title}
             </Typography>
-            <Typography
-              sx={{ mb: 1.5 }}
-              color="white"
-              variant="h4"
-              component="div"
-            >
+            <Typography sx={{ mb: 1.5 }} variant="h4" component="div">
               ${props.value}
             </Typography>
-            <Typography color="white">
-              Compared to - {props.comparedTo}
-            </Typography>
+            <Typography>Compared to - {props.comparedTo}</Typography>
             <Typography variant="body2">
               <br />
             </Typography>

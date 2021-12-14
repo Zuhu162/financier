@@ -26,7 +26,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 800,
-  bgcolor: "white",
+  bgcolor: "#212946",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
@@ -35,31 +35,43 @@ const style = {
 export default function FixedCosts(props) {
   const items = props.items ? props.items : [];
 
-  let totalCost = 0;
-  for (let i = 0; i < items.length; i++) {
-    totalCost += items[i].cost;
-  }
+  const [formData, setFormData] = useState({
+    name: "",
+    price: "",
+    id: "",
+    type: props.name,
+  });
 
   //MODAL
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleSubmit = () => {
-    console.log("Submitted");
+    console.log("Submitted", formData);
   };
 
   return (
     <Box mt={10}>
-      <Typography color="white" variant="h4">
-        {props.name}:<Badge className="badge">${totalCost}</Badge>
+      <Typography variant="h4">
+        {props.name}:<Badge className="badge">${props.total}</Badge>
       </Typography>
       <List>
         {items.map((items) => {
           return (
             <Card sx={{ marginBottom: "1px" }}>
-              <ListItem key={items} sx={{ color: "White" }}>
+              <ListItem
+                onClick={handleOpen}
+                key={items}
+                sx={{ color: "White" }}
+              >
                 <ListItemButton
-                  onClick={handleOpen}
+                  onClick={() =>
+                    setFormData({
+                      ...formData,
+                      name: items.name,
+                      price: items.cost,
+                    })
+                  }
                   sx={{ minHeight: "100px" }}
                 >
                   <ListItemAvatar>
@@ -85,69 +97,74 @@ export default function FixedCosts(props) {
         })}
         <NewItem default={props.name}></NewItem>
       </List>
-      {items.map((item) => (
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <Typography variant="h5">Edit Expenditure</Typography>
-            <TextField
-              // onChange={(e) => setEmail(e.currentTarget.value)}
-              margin="normal"
-              required
-              fullWidth
-              id="name"
-              value={item.name}
-              label="name"
-              name="name"
-              autoFocus
-            />
-            <TextField
-              // onChange={(e) => setPassword(e.currentTarget.value)}
-              margin="normal"
-              required
-              fullWidth
-              type="number"
-              value={item.cost}
-              id="price"
-              label="Price"
-              name="price"
-              autoFocus
-              sx={{ marginBottom: "25px" }}
-            />
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={["Utilities", "Entertainment", "Education", "MISC"]}
-              value={props.name}
-              sx={{ width: 300 }}
-              renderInput={(params) => <TextField {...params} label="Type" />}
-            />
-            <Button
-              onClick={handleSubmit}
-              type="submit"
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Submit
-            </Button>
-            <Button
-              onClick={handleSubmit}
-              type="delete"
-              variant="contained"
-              sx={{ ml: 2, mt: 3, mb: 2, backgroundColor: "secondary.main" }}
-            >
-              Delete
-            </Button>
-            {/* {error ? (
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography variant="h5">Edit Expenditure</Typography>
+          <TextField
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            color="primary"
+            margin="normal"
+            sx={{ borderColor: "white" }}
+            required
+            fullWidth
+            id="name"
+            value={formData.name}
+            label="name"
+            name="name"
+          />
+          <TextField
+            onChange={(e) =>
+              setFormData({ ...formData, price: e.target.value })
+            }
+            margin="normal"
+            required
+            fullWidth
+            type="number"
+            value={formData.price}
+            id="price"
+            label="Price"
+            name="price"
+            autoFocus
+            sx={{ marginBottom: "25px" }}
+          />
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={["Utilities", "Entertainment", "Education", "MISC"]}
+            sx={{ width: 300 }}
+            onChange={(event, value) =>
+              setFormData({ ...formData, type: value })
+            }
+            value={formData.type}
+            renderInput={(params) => <TextField {...params} label="Type" />}
+          />
+          <Button
+            onClick={handleSubmit}
+            type="submit"
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Save
+          </Button>
+          <Button
+            onClick={handleSubmit}
+            type="delete"
+            variant="contained"
+            sx={{ ml: 2, mt: 3, mb: 2, backgroundColor: "secondary.main" }}
+          >
+            Delete
+          </Button>
+          {/* {error ? (
             <Alert severity="error">Invalid email or password</Alert>
           ) : null} */}
-          </Box>
-        </Modal>
-      ))}
+        </Box>
+      </Modal>
     </Box>
   );
 }

@@ -15,7 +15,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Grid } from "@mui/material";
+import { Avatar, Grid, Menu, Tooltip } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -78,18 +78,28 @@ function ResponsiveDrawer(props) {
         }}
       >
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { xl: "none" } }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Financier
-          </Typography>
+          <Grid container>
+            <Grid item xs={1} md={0.5}>
+              <IconButton
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                sx={{ mr: 2, display: { xl: "none" } }}
+              >
+                <MenuIcon color="white" />
+              </IconButton>
+            </Grid>
+            <Grid item mt={0.5} xs={10} md={11}>
+              <Typography variant="h6" noWrap component="div">
+                Financier
+              </Typography>
+            </Grid>
+            <Grid item xs={1} md={0.5}>
+              <Avatar sx={{ width: 40, height: 40, bgcolor: "#EA4C89" }}>
+                <Typography color="text.primary">N</Typography>
+              </Avatar>
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
       <Box
@@ -130,6 +140,7 @@ function ResponsiveDrawer(props) {
           {drawer}
         </Drawer>
       </Box>
+
       <Box
         component="main"
         sx={{

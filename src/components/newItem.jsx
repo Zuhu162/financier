@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -20,24 +20,31 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 800,
-  bgcolor: "white",
+  bgcolor: "#212946",
   border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
 
 export default function NewItem(props) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   const handleSubmit = () => {
-    console.log("Submitted");
+    console.log("Submitted", formData);
   };
+
+  const [formData, setFormData] = useState({
+    name: "",
+    price: "",
+    type: props.default,
+  });
 
   return (
     <div>
       <Card>
-        <ListItem sx={{ color: "White" }}>
+        <ListItem>
           <ListItemButton onClick={handleOpen} sx={{ minHeight: "100px" }}>
             <Grid container justifyContent="center">
               <Grid item justifyContent="center">
@@ -56,7 +63,7 @@ export default function NewItem(props) {
         <Box sx={style}>
           <Typography variant="h5">Log New Expenditure</Typography>
           <TextField
-            // onChange={(e) => setEmail(e.currentTarget.value)}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             margin="normal"
             required
             fullWidth
@@ -67,7 +74,9 @@ export default function NewItem(props) {
           />
 
           <TextField
-            // onChange={(e) => setPassword(e.currentTarget.value)}
+            onChange={(e) =>
+              setFormData({ ...formData, price: e.target.value })
+            }
             margin="normal"
             required
             fullWidth
@@ -76,13 +85,15 @@ export default function NewItem(props) {
             label="Price"
             name="price"
             autoFocus
-            sx={{ marginBottom: "25px" }}
           />
           <Autocomplete
             disablePortal
             id="combo-box-demo"
+            onChange={(event, value) =>
+              setFormData({ ...formData, type: value })
+            }
+            value={formData.type}
             options={["Utilities", "Entertainment", "Education", "MISC"]}
-            value={props.default}
             sx={{ width: 300 }}
             renderInput={(params) => <TextField {...params} label="Type" />}
           />

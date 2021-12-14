@@ -10,16 +10,16 @@ export default function Jumbo(props) {
       <Box sx={{ mx: "auto" }} mb={5} padding={5} minHeight={500}>
         <Grid container>
           <Grid item xs={12}>
-            <Typography color="white" variant="h4">
+            <Typography variant="h4">
               <Box sx={{ fontWeight: "bold" }}>
                 Total Monthly Spendings: ${props.spendings.thisMonth}
               </Box>
             </Typography>
-            <Typography variant="secondary" color="white">
+            <Typography variant="secondary">
               Last Month: ${props.spendings.lastMonth}
             </Typography>
             <Box mt={10}>
-              <Barchart items={props.items}></Barchart>
+              <Barchart items={props.spendings}></Barchart>
             </Box>
           </Grid>
         </Grid>

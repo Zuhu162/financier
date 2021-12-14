@@ -10,34 +10,40 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const data = [
-  {
-    name: "Utilities",
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Entertainment",
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Education",
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: "MISC",
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-];
-
 export default function Barchart(props) {
+  const data = [
+    {
+      name: "Utilities",
+      uv: 4000,
+      pv: props.items.utilities,
+      amt: 2400,
+    },
+    {
+      name: "Entertainment",
+      uv: 3000,
+      pv: props.items.entertainment,
+      amt: 2210,
+    },
+    {
+      name: "Education",
+      uv: 2000,
+      pv: props.items.education,
+      amt: 2290,
+    },
+    {
+      name: "MISC",
+      uv: 2780,
+      pv: props.items.misc,
+      amt: 2000,
+    },
+    {
+      name: "One-Time",
+      uv: 2780,
+      pv: props.items.misc,
+      amt: 2000,
+    },
+  ];
+
   return (
     <ResponsiveContainer width="100%" height={400}>
       <BarChart

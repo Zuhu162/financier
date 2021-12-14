@@ -28,34 +28,35 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 }));
 
 export default function Saving(props) {
+  const { finances } = props;
+  const barProgress = (finances.currentlySaved / finances.saveGoal) * 100;
+
   return (
     <Card mt={10} sx={{ padding: "50px" }}>
       <Grid container>
         <Grid item xs={12}>
           <Box alignItems="center" minHeight={100}>
             <Grid item xs={12}>
-              <Typography color="white" variant="h6">
-                Saving for
+              <Typography variant="h6">
+                Saving for: {finances.saveItem}
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              <Typography color="white" variant="p">
-                You're on track to save $5000 a month
+              <Typography variant="p">
+                You're on track to save ${finances.saveGoal} a month
               </Typography>
             </Grid>
           </Box>
           <Grid item xs={12}>
-            <BorderLinearProgress variant="determinate" value={50} />
+            <BorderLinearProgress variant="determinate" value={barProgress} />
           </Grid>
           <Grid item xs={12}>
             <Box textAlign="right">
-              <Typography color="white" variant="p">
-                $5000
-              </Typography>
+              <Typography variant="p">${finances.saveGoal}</Typography>
             </Box>
             <Box textAlign="center">
-              <Typography color="white" variant="p">
-                You're on track to save $5000 a month
+              <Typography variant="p">
+                Currently Saved: ${finances.currentlySaved}
               </Typography>
             </Box>
           </Grid>

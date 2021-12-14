@@ -6,13 +6,13 @@ import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import History from "./components/pages/history";
 import Statistics from "./components/pages/statistics";
 import Profile from "./components/pages/profile";
+import Login from "./components/pages/login";
 
 const theme = createMuiTheme({
   palette: {
     type: "dark",
     primary: {
-      main: "#272737",
-      dark: "#121212",
+      main: "#3f51b5",
     },
     secondary: {
       main: "#f50057",
@@ -20,6 +20,12 @@ const theme = createMuiTheme({
     background: {
       paper: "#1E1E1E",
       default: "#121212",
+    },
+    text: {
+      primary: "#ffffff",
+    },
+    error: {
+      main: "#291a1a",
     },
   },
 });
@@ -35,6 +41,7 @@ function App() {
               path="/statistics"
               element={<Statistics></Statistics>}
             ></Route>
+            <Route path="/login" element={<Login></Login>}></Route>
             <Route path="/profile" element={<Profile></Profile>}></Route>
             <Route path="/history" element={<History></History>}></Route>
             <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>

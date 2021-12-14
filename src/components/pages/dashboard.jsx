@@ -9,6 +9,7 @@ import Saving from "../savings";
 import NewItem from "../newItem";
 
 function Dashboard() {
+  //API data placeholders
   const [utilItems, setUtilItems] = useState([
     {
       name: "Electricity",
@@ -52,41 +53,46 @@ function Dashboard() {
       cost: 10,
     },
   ]);
-  const [miscItems, setMiscItems] = useState([
-    {
-      name: "Maths Tuition",
-      cost: 150,
-    },
-  ]);
+  const [miscItems, setMiscItems] = useState([]);
 
-  const [spendings, setSpendings] = useState({
+  const [finances, setfinances] = useState({
     income: 2000,
+    saveGoal: 5000,
+    currentlySaved: 2000,
+    saveItem: "Graphics Card",
     thisMonth: 0,
     lastMonth: 300,
+    entertainment: 0,
+    utilities: 0,
+    education: 0,
+    misc: 0,
+    oneTime: 0,
   });
 
-  entertainmentItems.forEach((e) => (spendings.thisMonth += e.cost));
-  utilItems.forEach((e) => (spendings.thisMonth += e.cost));
-  educationItems.forEach((e) => (spendings.thisMonth += e.cost));
-  miscItems.forEach((e) => (spendings.thisMonth += e.cost));
-  console.log(spendings);
+  //Calculations for totals
+  entertainmentItems.forEach(
+    (e) => ((finances.thisMonth += e.cost), (finances.entertainment += e.cost))
+  );
+  utilItems.forEach(
+    (e) => ((finances.thisMonth += e.cost), (finances.utilities += e.cost))
+  );
+  educationItems.forEach(
+    (e) => ((finances.thisMonth += e.cost), (finances.education += e.cost))
+  );
+  miscItems.forEach(
+    (e) => ((finances.thisMonth += e.cost), (finances.misc += e.cost))
+  ); //Use setFinances
 
   return (
     <Grid container justifyContent="center">
       <Grid item xs={12} mb={2}>
-        <Jumbo
-          spendings={spendings}
-          items={[utilItems, entertainmentItems, educationItems, miscItems]}
-        ></Jumbo>
-      </Grid>
-      <Grid item xs={12} md={1} mr={1}>
-        <NewItem default="One-Time"></NewItem>
+        <Jumbo spendings={finances}></Jumbo>
       </Grid>
       <Grid item xs={12} md={4}>
         <FeaturedInfo
           title="Total Spendings"
           comparedTo="Last Month"
-          value="-120"
+          value={finances.lastMonth - finances.thisMonth}
         />
       </Grid>
       <Grid item xs={12} md={4}>
@@ -96,24 +102,35 @@ function Dashboard() {
           value="+120"
         />
       </Grid>
-
-      <Grid item mr={2} xs={8}>
-        <Saving></Saving>
+      <Grid item xs={12} md={2} mr={1} mb={2}>
+        <NewItem default="One-Time"></NewItem>
+      </Grid>
+      <Grid item mr={2} xs={12} lg={8}>
+        <Saving finances={finances}></Saving>
       </Grid>
       <Grid item mr={2} xs={12} md={5}>
-        <FixedCosts name={"Utilities"} items={utilItems}></FixedCosts>
+        <FixedCosts
+          name={"Utilities"}
+          items={utilItems}
+          total={finances.utilities}
+        ></FixedCosts>
       </Grid>
       <Grid item xs={12} md={5}>
         <FixedCosts
           name={"Entertainment"}
           items={entertainmentItems}
+          total={finances.entertainment}
         ></FixedCosts>
       </Grid>
       <Grid item mr={2} xs={12} md={5}>
-        <FixedCosts name={"Education"} items={educationItems}></FixedCosts>
+        <FixedCosts
+          name={"Education"}
+          items={educationItems}
+          total={finances.education}
+        ></FixedCosts>
       </Grid>
       <Grid item xs={12} md={5}>
-        <FixedCosts name={"MISC"}></FixedCosts>
+        <FixedCosts name={"MISC"} total={finances.misc}></FixedCosts>
       </Grid>
     </Grid>
   );
