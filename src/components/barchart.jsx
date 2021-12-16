@@ -15,31 +15,31 @@ export default function Barchart(props) {
     {
       name: "Utilities",
       uv: 4000,
-      pv: props.items.utilities,
+      Total: props.items.utilities,
       amt: 2400,
     },
     {
       name: "Entertainment",
       uv: 3000,
-      pv: props.items.entertainment,
+      Total: props.items.entertainment,
       amt: 2210,
     },
     {
       name: "Education",
       uv: 2000,
-      pv: props.items.education,
+      Total: props.items.education,
       amt: 2290,
     },
     {
       name: "MISC",
       uv: 2780,
-      pv: props.items.misc,
+      Total: props.items.misc,
       amt: 2000,
     },
     {
-      name: "One-Time",
+      name: "One-Time(This Month)",
       uv: 2780,
-      pv: props.items.misc,
+      Total: props.items.oneTime,
       amt: 2000,
     },
   ];
@@ -58,9 +58,9 @@ export default function Barchart(props) {
         <CartesianGrid stroke="#1E1E1E" strokeDasharray="none" />
         <XAxis dataKey="name" />
         <YAxis />
-        <Tooltip />
+        <Tooltip cursor={{ fill: "#1E1E1E" }} />
         <Legend />
-        <Bar dataKey="pv" fill="#8884d8" />
+        <Bar dataKey="Total" fill="#8884d8" />
       </BarChart>
     </ResponsiveContainer>
   );

@@ -1,5 +1,4 @@
 import {
-  Alert,
   Box,
   Button,
   Card,
@@ -13,10 +12,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-export default function Login() {
+export default function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(false);
 
   const handleSubmit = async (e) => {
     let user = {
@@ -25,10 +24,10 @@ export default function Login() {
     };
 
     try {
-      const res = await axios.post("/auth/login", user);
+      const res = await axios.post("/auth/register", user);
 
       localStorage.setItem("token", res.data);
-      window.location.replace("/");
+      window.location.replace("/dashboard");
     } catch (err) {
       setError(true);
     }
@@ -55,7 +54,7 @@ export default function Login() {
             <Grid container direction="row" justifyContent="center">
               <Grid item mb={6} mt={2}>
                 <Typography variant="h5" fontWeight="bold">
-                  Welcome Back to Financier!
+                  Get Started with Financier!
                 </Typography>
               </Grid>
               <Grid item xs={12} lg={8}>
@@ -91,22 +90,15 @@ export default function Login() {
                   variant="contained"
                   sx={{ mt: 2, mb: 2, width: "100%", height: "50px" }}
                 >
-                  Login
+                  Register
                 </Button>
-                {error ? (
-                  <Alert
-                    sx={{ bgcolor: "secondary.main", color: "white" }}
-                    severity="error"
-                  >
-                    Invalid email or password
-                  </Alert>
-                ) : null}
+
                 <Typography color="primary.main" mt={3}>
                   <Link
                     style={{ textDecoration: "none", color: "#FFF" }}
-                    to="/register"
+                    to="/login"
                   >
-                    Don't have an account? Click here to register.
+                    Already have an account? Click here to Login.
                   </Link>
                 </Typography>
               </Grid>

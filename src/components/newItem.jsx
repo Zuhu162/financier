@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -13,6 +13,7 @@ import {
   ListItemButton,
   TextField,
 } from "@mui/material";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -31,15 +32,60 @@ export default function NewItem(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleSubmit = () => {
-    console.log("Submitted", formData);
-  };
-
   const [formData, setFormData] = useState({
     name: "",
-    price: "",
+    cost: "",
     type: props.default,
   });
+
+  let type;
+
+  if (formData.type === "Entertainment") {
+    type = {
+      Entertainment: {
+        name: formData.name,
+        cost: formData.cost,
+      },
+    };
+  } else if (formData.type === "Utilities") {
+    type = {
+      Utility: {
+        name: formData.name,
+        cost: formData.cost,
+      },
+    };
+  } else if (formData.type === "Education") {
+    type = {
+      Education: {
+        name: formData.name,
+        cost: formData.cost,
+      },
+    };
+  } else if (formData.type === "MISC") {
+    type = {
+      MISC: {
+        name: formData.name,
+        cost: formData.cost,
+      },
+    };
+  } else if (formData.type === "One-Time") {
+    type = {
+      OneTime: {
+        name: formData.name,
+        cost: formData.cost,
+      },
+    };
+  }
+
+  const handleSubmit = async () => {
+    console.log("Submitted", type);
+
+    const res = await axios.put(
+      `/users/${localStorage.getItem("currentUser")}/add`,
+      type
+    );
+    window.location.replace("/");
+  };
 
   return (
     <div>
@@ -74,9 +120,7 @@ export default function NewItem(props) {
           />
 
           <TextField
-            onChange={(e) =>
-              setFormData({ ...formData, price: e.target.value })
-            }
+            onChange={(e) => setFormData({ ...formData, cost: e.target.value })}
             margin="normal"
             required
             fullWidth

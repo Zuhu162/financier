@@ -6,7 +6,9 @@ import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRou
 import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Checkbox from "@mui/material/Checkbox";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import Avatar from "@mui/material/Avatar";
+import SaveIcon from "@mui/icons-material/Save";
 import {
   Autocomplete,
   Badge,
@@ -19,6 +21,7 @@ import {
   Typography,
 } from "@mui/material";
 import NewItem from "./newItem";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -35,10 +38,15 @@ const style = {
 export default function FixedCosts(props) {
   const items = props.items ? props.items : [];
 
+  const [defaultData, setDefaultData] = useState({
+    name: "",
+    cost: "",
+    type: props.name,
+  });
+
   const [formData, setFormData] = useState({
     name: "",
-    price: "",
-    id: "",
+    cost: "",
     type: props.name,
   });
 
@@ -46,8 +54,105 @@ export default function FixedCosts(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const handleSubmit = () => {
-    console.log("Submitted", formData);
+
+  let type;
+  let type2;
+
+  if (defaultData.type === "Entertainment") {
+    type2 = {
+      Entertainment: {
+        name: defaultData.name,
+        cost: defaultData.cost,
+      },
+    };
+  } else if (defaultData.type === "Utilities") {
+    type2 = {
+      Utility: {
+        name: defaultData.name,
+        cost: defaultData.cost,
+      },
+    };
+  } else if (defaultData.type === "Education") {
+    type2 = {
+      Education: {
+        name: defaultData.name,
+        cost: defaultData.cost,
+      },
+    };
+  } else if (defaultData.type === "MISC") {
+    type2 = {
+      MISC: {
+        name: defaultData.name,
+        cost: defaultData.cost,
+      },
+    };
+  } else if (defaultData.type === "One-Time") {
+    type2 = {
+      OneTime: {
+        name: defaultData.name,
+        cost: defaultData.cost,
+      },
+    };
+  }
+  if (formData.type === "Entertainment") {
+    type = {
+      Entertainment: {
+        name: formData.name,
+        cost: formData.cost,
+      },
+    };
+  } else if (formData.type === "Utilities") {
+    type = {
+      Utility: {
+        name: formData.name,
+        cost: formData.cost,
+      },
+    };
+  } else if (formData.type === "Education") {
+    type = {
+      Education: {
+        name: formData.name,
+        cost: formData.cost,
+      },
+    };
+  } else if (formData.type === "MISC") {
+    type = {
+      MISC: {
+        name: formData.name,
+        cost: formData.cost,
+      },
+    };
+  } else if (formData.type === "One-Time") {
+    type = {
+      OneTime: {
+        name: formData.name,
+        cost: formData.cost,
+      },
+    };
+  }
+
+  const handleSubmit = async () => {
+    console.log("Submitted", type);
+
+    const res = await axios.put(
+      `/users/${localStorage.getItem("currentUser")}/add`,
+      type
+    );
+    const res2 = await axios.put(
+      `/users/${localStorage.getItem("currentUser")}/remove`,
+      type2
+    );
+    window.location.replace("/");
+  };
+
+  const handleDelete = async () => {
+    try {
+      const res = await axios.put(
+        `/users/${localStorage.getItem("currentUser")}/remove`,
+        type
+      );
+      window.location.replace("/");
+    } catch (err) {}
   };
 
   return (
@@ -65,20 +170,24 @@ export default function FixedCosts(props) {
                 sx={{ color: "White" }}
               >
                 <ListItemButton
-                  onClick={() =>
+                  onClick={() => {
                     setFormData({
                       ...formData,
                       name: items.name,
-                      price: items.cost,
-                    })
-                  }
+                      cost: items.cost,
+                    });
+                    setDefaultData({
+                      ...formData,
+                      name: items.name,
+                      cost: items.cost,
+                    });
+                  }}
                   sx={{ minHeight: "100px" }}
                 >
                   <ListItemAvatar>
-                    <Avatar
-                      alt={`Avatar n°${items + 1}`}
-                      src={`/static/images/avatar/${items + 1}.jpg`}
-                    />
+                    <Avatar sx={{ bgcolor: "#1A90FF", color: "white" }}>
+                      {items.name[0]}
+                    </Avatar>
                   </ListItemAvatar>
                   <ListItemText>
                     <Box textAlign="left">
@@ -119,17 +228,15 @@ export default function FixedCosts(props) {
             name="name"
           />
           <TextField
-            onChange={(e) =>
-              setFormData({ ...formData, price: e.target.value })
-            }
+            onChange={(e) => setFormData({ ...formData, cost: e.target.value })}
             margin="normal"
             required
             fullWidth
             type="number"
-            value={formData.price}
-            id="price"
-            label="Price"
-            name="price"
+            value={formData.cost}
+            id="cost"
+            label="cost"
+            name="cost"
             autoFocus
             sx={{ marginBottom: "25px" }}
           />
@@ -151,14 +258,16 @@ export default function FixedCosts(props) {
             sx={{ mt: 3, mb: 2 }}
           >
             Save
+            <SaveIcon sx={{ ml: 0.5, mr: 1 }}></SaveIcon>
           </Button>
           <Button
-            onClick={handleSubmit}
+            onClick={handleDelete}
             type="delete"
             variant="contained"
             sx={{ ml: 2, mt: 3, mb: 2, backgroundColor: "secondary.main" }}
           >
             Delete
+            <DeleteForeverIcon></DeleteForeverIcon>
           </Button>
           {/* {error ? (
             <Alert severity="error">Invalid email or password</Alert>

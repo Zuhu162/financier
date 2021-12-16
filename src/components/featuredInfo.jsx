@@ -16,6 +16,16 @@ export default function FeaturedInfo(props) {
           bgcolor: props.value > 0 ? "secondary.main" : "#00C49F",
           mb: 2,
           mr: 1,
+          ":hover":
+            props.value < 0
+              ? {
+                  bgcolor: "rgba(0, 196, 180, 1)",
+                  color: "white",
+                }
+              : {
+                  bgcolor: "rgba(255, 0, 115, 1)",
+                  color: "white",
+                },
         }}
       >
         <Box sx={{ display: "flex" }}>
@@ -24,7 +34,8 @@ export default function FeaturedInfo(props) {
               {props.title}
             </Typography>
             <Typography sx={{ mb: 1.5 }} variant="h4" component="div">
-              ${props.value}
+              ${props.value > 0 ? `+` : ``}
+              {props.value}
             </Typography>
             <Typography>Compared to - {props.comparedTo}</Typography>
             <Typography variant="body2">

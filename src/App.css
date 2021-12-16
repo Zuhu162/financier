@@ -11,3 +11,8 @@
 .glow2 {
   border-radius: 50px;
 }
+
+.text-link {
+  color: inherit;
+  text-decoration: inherit;
+}

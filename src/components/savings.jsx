@@ -7,6 +7,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import { styled } from "@mui/material/styles";
 import Checkbox from "@mui/material/Checkbox";
+import Chip from "@mui/material/Chip";
 import Avatar from "@mui/material/Avatar";
 import LinearProgress, {
   linearProgressClasses,
@@ -29,7 +30,8 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
 
 export default function Saving(props) {
   const { finances } = props;
-  const barProgress = (finances.currentlySaved / finances.saveGoal) * 100;
+  const barProgress =
+    ((finances.income - finances.thisMonth) / finances.income) * 100;
 
   return (
     <Card mt={10} sx={{ padding: "50px" }}>
@@ -38,12 +40,12 @@ export default function Saving(props) {
           <Box alignItems="center" minHeight={100}>
             <Grid item xs={12}>
               <Typography variant="h6">
-                Saving for: {finances.saveItem}
+                Total Income: ${finances.income}
               </Typography>
             </Grid>
             <Grid item xs={12}>
-              <Typography variant="p">
-                You're on track to save ${finances.saveGoal} a month
+              <Typography color="secondary.main" variant="h6">
+                You currently have spent: ${finances.thisMonth}
               </Typography>
             </Grid>
           </Box>
@@ -52,11 +54,11 @@ export default function Saving(props) {
           </Grid>
           <Grid item xs={12}>
             <Box textAlign="right">
-              <Typography variant="p">${finances.saveGoal}</Typography>
+              <Typography variant="p">${finances.income}</Typography>
             </Box>
             <Box textAlign="center">
-              <Typography variant="p">
-                Currently Saved: ${finances.currentlySaved}
+              <Typography variant="h6">
+                Currently Remaining: ${finances.income - finances.thisMonth}
               </Typography>
             </Box>
           </Grid>

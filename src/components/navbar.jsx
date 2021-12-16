@@ -34,32 +34,71 @@ function ResponsiveDrawer(props) {
       <Divider />
 
       <List sx={{ color: "white" }}>
-        {["Dashboard", "Profile", "Statistics", "History"].map(
-          (text, index) => (
-            <Link
-              style={{ textDecoration: "none", color: "#FFF" }}
-              to={`/${text.toLowerCase()}`}
-            >
-              <ListItem button key={text}>
-                <ListItemIcon sx={{ color: "white" }}>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            </Link>
-          )
-        )}
+        <Link className="text-link" to={`/`}>
+          <ListItem button>
+            <ListItemIcon sx={{ color: "white" }}>
+              <MailIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </ListItem>
+        </Link>
+
+        <Link className="text-link" to={`/profile`}>
+          <ListItem button>
+            <ListItemIcon sx={{ color: "white" }}>
+              <MailIcon />
+            </ListItemIcon>
+            <ListItemText primary="Profile" />
+          </ListItem>
+        </Link>
+        <Link className="text-link" to={`/history`}>
+          <ListItem button>
+            <ListItemIcon sx={{ color: "white" }}>
+              <MailIcon />
+            </ListItemIcon>
+            <ListItemText primary="History" />
+          </ListItem>
+        </Link>
+        <Link className="text-link" to={`/statistics`}>
+          <ListItem button>
+            <ListItemIcon sx={{ color: "white" }}>
+              <MailIcon />
+            </ListItemIcon>
+            <ListItemText primary="Statistics" />
+          </ListItem>
+        </Link>
       </List>
       <Divider />
       <List sx={{ color: "white" }}>
-        {["Sign Out"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon sx={{ color: "white" }}>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        {props.user ? (
+          <Link className="text-link" to="/logout">
+            <ListItem button>
+              <ListItemIcon sx={{ color: "white" }}>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="Sign Out" />
+            </ListItem>
+          </Link>
+        ) : (
+          <Box>
+            <Link className="text-link" to="/login">
+              <ListItem button>
+                <ListItemIcon sx={{ color: "white" }}>
+                  <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary="Login" />
+              </ListItem>
+            </Link>
+            <Link className="text-link" to="/register">
+              <ListItem button>
+                <ListItemIcon sx={{ color: "white" }}>
+                  <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary="Register" />
+              </ListItem>
+            </Link>
+          </Box>
+        )}
       </List>
     </div>
   );
@@ -94,11 +133,15 @@ function ResponsiveDrawer(props) {
                 Financier
               </Typography>
             </Grid>
-            <Grid item xs={1} md={0.5}>
-              <Avatar sx={{ width: 40, height: 40, bgcolor: "#EA4C89" }}>
-                <Typography color="text.primary">N</Typography>
-              </Avatar>
-            </Grid>
+            {props.user ? (
+              <Grid item xs={1} md={0.5}>
+                <Avatar sx={{ width: 40, height: 40, bgcolor: "#EA4C89" }}>
+                  <Typography color="text.primary">
+                    {props.user.username[0].toUpperCase()}
+                  </Typography>
+                </Avatar>
+              </Grid>
+            ) : null}
           </Grid>
         </Toolbar>
       </AppBar>
