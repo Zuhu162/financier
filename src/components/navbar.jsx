@@ -17,6 +17,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Avatar, Grid, Menu, Tooltip } from "@mui/material";
 import { Link } from "react-router-dom";
+import logo from "../assets/financierLogo.svg";
 
 const drawerWidth = 240;
 
@@ -30,11 +31,19 @@ function ResponsiveDrawer(props) {
 
   const drawer = (
     <div>
+      <Grid container mb={-9}>
+        <Grid item xs={6} ml={-3}>
+          <img style={{ height: "100px" }} src={logo} alt="" />
+        </Grid>
+        <Grid item xs={6} mt={4}>
+          <Typography variant="h6">Financier</Typography>
+        </Grid>
+      </Grid>
       <Toolbar />
       <Divider />
 
       <List sx={{ color: "white" }}>
-        <Link className="text-link" to={`/`}>
+        <Link className="text-link" to={`/dashboard`}>
           <ListItem button>
             <ListItemIcon sx={{ color: "white" }}>
               <MailIcon />
@@ -42,7 +51,6 @@ function ResponsiveDrawer(props) {
             <ListItemText primary="Dashboard" />
           </ListItem>
         </Link>
-
         <Link className="text-link" to={`/profile`}>
           <ListItem button>
             <ListItemIcon sx={{ color: "white" }}>

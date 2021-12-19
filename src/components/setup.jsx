@@ -13,18 +13,17 @@ import { Link } from "react-router-dom";
 
 export default function Setup() {
   const [income, setIncome] = useState("");
-  const [lastMonth, setLastMonth] = useState("");
 
   const userId = `${localStorage.getItem("currentUser")}`;
 
   const handleSave = async (e) => {
-    if (!income || !lastMonth) {
+    if (!income) {
       alert("Please fill out all fields");
+      return;
     }
 
     let finances = {
       income: income,
-      lastMonth: lastMonth,
     };
 
     try {
@@ -68,25 +67,7 @@ export default function Setup() {
                     color: "white",
                   }}
                 />
-                <Typography variant="h6" fontWeight="bold">
-                  Approximate money spent last month:
-                </Typography>
-                <TextField
-                  onChange={(e) => setLastMonth(e.currentTarget.value)}
-                  margin="normal"
-                  required
-                  fullWidth
-                  type="number"
-                  autoFocus
-                  id="Income"
-                  name="Income"
-                  sx={{
-                    marginBottom: "25px",
-                    border: "1px solid white",
-                    borderRadius: "5px",
-                    color: "white",
-                  }}
-                />
+
                 <Typography variant="h6" mt={5} fontWeight="bold">
                   Add your fixed costs for the month below <br />
                 </Typography>

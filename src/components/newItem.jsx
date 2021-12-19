@@ -94,7 +94,9 @@ export default function NewItem(props) {
           <ListItemButton onClick={handleOpen} sx={{ minHeight: "100px" }}>
             <Grid container justifyContent="center">
               <Grid item justifyContent="center">
-                <AddCircleOutlineRoundedIcon sx={{ fontSize: 30 }} />
+                <AddCircleOutlineRoundedIcon
+                  sx={{ fontSize: 35, color: "#00C49F" }}
+                />
               </Grid>
             </Grid>
           </ListItemButton>

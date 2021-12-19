@@ -1,4 +1,4 @@
-import { Box, Grid, Toolbar } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import React, { useState, useEffect } from "react";
 import FixedCosts from "../fixedCosts";
@@ -54,7 +54,29 @@ function Dashboard(props) {
     fetchUserData();
   }, []);
 
-  //Calculations for totals
+  //Get OneTime expenditures details of this month and last month
+  const thisMonthOneTime = [];
+  let lastMonthOneTime = 0;
+  let thisMonthOneTimeTotal = 0;
+  oneTime.map((item) => {
+    const month = new Date(item.created_at).getMonth();
+    const year = new Date(item.created_at).getFullYear();
+
+    const thisMonth = new Date().getMonth();
+    const thisYear = new Date().getFullYear();
+    if (month === thisMonth && year === thisYear) {
+      thisMonthOneTime.push(item);
+      thisMonthOneTimeTotal += item.cost;
+    }
+    if (
+      (month === thisMonth - 1 || (thisMonth === 1 && month === 11)) &&
+      year === thisYear
+    ) {
+      lastMonthOneTime += item.cost;
+    }
+  });
+
+  //Calculations for totals of this month
 
   entertainmentItems.forEach(
     (e) => ((Finances.thisMonth += e.cost), (Finances.entertainment += e.cost))
@@ -68,31 +90,39 @@ function Dashboard(props) {
   miscItems.forEach(
     (e) => ((Finances.thisMonth += e.cost), (Finances.misc += e.cost))
   );
-  oneTime.forEach(
+  thisMonthOneTime.forEach(
     (e) => ((Finances.thisMonth += e.cost), (Finances.oneTime += e.cost))
   );
+
+  //Calculate All expenditures of last month;
+  Finances.lastMonth = Finances.thisMonth + lastMonthOneTime;
 
   return (
     <Box>
       {finances ? (
         <Grid container justifyContent="center">
           <Grid item xs={12} mb={2}>
-            <Jumbo spendings={Finances}></Jumbo>
+            <Jumbo spendings={Finances} oneTime={oneTime}></Jumbo>
           </Grid>
-          <Grid item xs={12} md={4}>
-            <FeaturedInfo
-              title="Total Spendings"
-              comparedTo="Last Month"
-              value={Finances.thisMonth - Finances.lastMonth}
-            />
-          </Grid>
-          <Tooltip title="Check one time purchases" placement="top">
+          <Tooltip
+            title="Total Fixed Costs + Last Month's One Time Expenditures"
+            placement="top"
+          >
+            <Grid item xs={12} md={4}>
+              <FeaturedInfo
+                title="Total Spendings"
+                comparedTo="Last Month"
+                value={Finances.thisMonth - Finances.lastMonth}
+              />
+            </Grid>
+          </Tooltip>
+          <Tooltip title="View one time purchases" placement="top">
             <Grid item xs={12} md={4}>
               <Link className="text-link" to="/history">
                 <FeaturedInfo
-                  title="One Time Spendings"
+                  title="Non Recurring Spendings"
                   comparedTo="Last Month"
-                  value="120"
+                  value={thisMonthOneTimeTotal - lastMonthOneTime}
                 />
               </Link>
             </Grid>
@@ -133,7 +163,11 @@ function Dashboard(props) {
           ></FixedCosts>
         </Grid>
         <Grid item xs={12} md={5}>
-          <FixedCosts name={"MISC"} total={Finances.misc}></FixedCosts>
+          <FixedCosts
+            name={"MISC"}
+            items={miscItems}
+            total={Finances.misc}
+          ></FixedCosts>
         </Grid>
       </Grid>
     </Box>

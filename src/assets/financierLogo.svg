@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.2.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1920 1080" style="enable-background:new 0 0 1920 1080;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#203461;}
+	.st1{fill:#FFFFFF;stroke:#203461;stroke-width:12;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st2{fill:#EC407A;}
+	.st3{fill:#203461;stroke:#FCFCFC;stroke-width:12;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st4{fill:#203461;stroke:#FCFCFC;stroke-width:7;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:10;}
+	.st5{fill:#F9F9F9;stroke:#203461;stroke-width:12;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st6{fill:#FCFCFC;stroke:#203461;stroke-width:7;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:10;}
+	.st7{opacity:0.52;fill:none;stroke:#FFFFFF;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st8{fill:none;stroke:#203461;stroke-width:12;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st9{opacity:0.39;fill:#FFFFFF;}
+	.st10{font-family:'ArialRoundedMTBold';}
+	.st11{font-size:108.5152px;}
+</style>
+<g id="Layer_2">
+</g>
+<g id="Layer_1">
+	<path class="st0" d="M1204.99,474.62l-100.14-40.35L923,538l3,119c0,0,22,111,121,28S1204.99,474.62,1204.99,474.62z"/>
+	<polygon class="st1" points="922.5,537.5 922.5,863.5 633.5,694.5 632.5,373.5 	"/>
+	<path class="st0" d="M916.22,685c-37.47-68.29-59.48-89.16-83.87-96.41c-47.54-14.12-86.41,20.89-135.62,0
+		c-30.85-13.09-51-38.19-61.72-57.59l129-78l156,84L916.22,685z"/>
+	<path class="st2" d="M638,529c10.86,16.99,28.65,37.69,59.9,49.15c49.84,18.28,85.59-12.36,133.74,0
+		c24.7,6.34,58.8,25.59,90.36,87.92V863L638,693V529z"/>
+	<polygon class="st3" points="899.97,530.5 849,562 849,501.85 	"/>
+	<line class="st4" x1="872" y1="527" x2="884.96" y2="518.91"/>
+	<polygon class="st1" points="1210.5,372.5 922.5,537.5 867.34,506.5 816.37,477.85 632.5,374.5 921.5,209.5 950.77,226.01 
+		1023.84,267.22 	"/>
+	<polygon class="st0" points="1046,297 1058,306 808,456 793,447 	"/>
+	<polygon class="st5" points="994,136 994.1,327.82 840.11,427 840,221 	"/>
+	<g>
+		<line class="st6" x1="860.36" y1="358.31" x2="972.81" y2="290.09"/>
+		<line class="st6" x1="861.6" y1="341.48" x2="974.06" y2="273.27"/>
+		<line class="st6" x1="860.98" y1="324.04" x2="973.43" y2="255.82"/>
+		<line class="st6" x1="860.36" y1="307.22" x2="972.81" y2="239"/>
+	</g>
+	<polyline class="st7" points="906,836 648,685 648,625 	"/>
+	<polyline class="st7" points="680,688 663,677.81 663,655 	"/>
+	<line class="st7" x1="904" y1="546" x2="904" y2="711"/>
+	<path class="st2" d="M926,667c4.17,1.97,32.72,70.43,84,30c104-82,81.47-115.12,116-160c28.44-36.97,45-46,85-65v199L926,868V667z"
+		/>
+	<polygon class="st8" points="1211,373 1211,671 926,868 926,537.5 	"/>
+	<polyline class="st7" points="1195,404 1195,659 951,829 	"/>
+	<text transform="matrix(0.4026 -0.2533 -7.387949e-03 1 941.4683 740.8645)" class="st9 st10 st11">FINANCIER</text>
+	<polyline class="st7" points="1182,625 1182,651 1161,665 	"/>
+</g>
+</svg>

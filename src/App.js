@@ -13,10 +13,11 @@ import Statistics from "./components/pages/statistics";
 import Profile from "./components/pages/profile";
 import Login from "./components/pages/login";
 import Register from "./components/pages/register";
-import Setup from "./components/setup";
 import { useState, useEffect } from "react";
 import jwtDecode from "jwt-decode";
 import Logout from "./components/pages/logout";
+import Navbar2 from "./components/appBar";
+import Home from "./components/pages/home";
 
 const theme = createMuiTheme({
   palette: {
@@ -63,32 +64,48 @@ function App() {
   return (
     <Router>
       <ThemeProvider theme={theme}>
-        <Navbar user={user}></Navbar>
-        <div className="container">
-          <Switch>
-            <Route path="/logout">
-              <Logout></Logout>
-            </Route>
-            <Route path="/register">
-              <Register></Register>
-            </Route>
-            <Route path="/login">
-              <Login></Login>
-            </Route>
-            <Route exact path="/statistics">
-              {user ? <Statistics></Statistics> : <Redirect to="/" />}
-            </Route>
-            <Route exact path="/profile">
-              {user ? <Profile></Profile> : <Redirect to="/" />}
-            </Route>
-            <Route exact path="/history">
-              {user ? <History></History> : <Redirect to="/" />}
-            </Route>
-            <Route exact path="/">
-              {user ? <Dashboard user={user}></Dashboard> : <Redirect to="/" />}
-            </Route>
-          </Switch>
-        </div>
+        {user ? <Navbar user={user}></Navbar> : <Navbar2></Navbar2>}
+
+        <Box
+          sx={{
+            width: "100%",
+            minHeight: "100vh",
+            bgcolor: "background.default",
+          }}
+        >
+          <div className="container">
+            <Switch>
+              <Route path="/logout">
+                <Logout></Logout>
+              </Route>
+              <Route path="/register">
+                <Register></Register>
+              </Route>
+              <Route path="/login">
+                <Login></Login>
+              </Route>
+              <Route exact path="/statistics">
+                {user ? <Statistics></Statistics> : <Redirect to="/" />}
+              </Route>
+              <Route exact path="/profile">
+                {user ? <Profile user={user}></Profile> : <Redirect to="/" />}
+              </Route>
+              <Route exact path="/history">
+                {user ? <History></History> : <Redirect to="/" />}
+              </Route>
+              <Route exact path="/dashboard">
+                {user ? (
+                  <Dashboard user={user}></Dashboard>
+                ) : (
+                  <Redirect to="/" />
+                )}
+              </Route>
+              <Route exact path="/">
+                {user ? <Dashboard user={user}></Dashboard> : <Home></Home>}
+              </Route>
+            </Switch>
+          </div>
+        </Box>
       </ThemeProvider>
     </Router>
   );

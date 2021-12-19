@@ -7,18 +7,22 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import logo from "../../assets/placeholderLogo.png";
+import logo from "../../assets/financierLogo.svg";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function Register() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
 
   const handleSubmit = async (e) => {
     let user = {
+      firstName: firstName,
+      lastName: lastName,
       username: username,
       password: password,
     };
@@ -41,6 +45,7 @@ export default function Register() {
       sx={{ height: "80vh" }}
       justifyContent="center"
       alignItems="center"
+      pt={3}
     >
       <Grid item xs={12} lg={6}>
         <Card sx={{ minHeight: "5vh", bgcolor: "primary.main" }}></Card>
@@ -48,7 +53,7 @@ export default function Register() {
           <CardContent>
             <Grid container justifyContent="center" mt={3}>
               <Grid item>
-                <img style={{ height: "75px" }} src={logo} alt="" />
+                <img style={{ height: "150px" }} src={logo} alt="" />
               </Grid>
             </Grid>
             <Grid container direction="row" justifyContent="center">
@@ -58,6 +63,32 @@ export default function Register() {
                 </Typography>
               </Grid>
               <Grid item xs={12} lg={8}>
+                <div className="form-group">
+                  <label for="exampleInputEmail1">First Name</label>
+                  <input
+                    onChange={(e) => setFirstName(e.currentTarget.value)}
+                    type="name"
+                    className="form-control p-3"
+                    id="exampleInputusername1"
+                    aria-describedby="usernameHelp"
+                    placeholder="Enter First Name"
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={12} lg={8} mt={3}>
+                <div className="form-group">
+                  <label for="exampleInputEmail1">Last Name</label>
+                  <input
+                    onChange={(e) => setLastName(e.currentTarget.value)}
+                    type="name"
+                    className="form-control p-3"
+                    id="exampleInputusername1"
+                    aria-describedby="usernameHelp"
+                    placeholder="Enter Last Name"
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={12} lg={8} mt={3}>
                 <div className="form-group">
                   <label for="exampleInputEmail1">Username</label>
                   <input
@@ -93,7 +124,7 @@ export default function Register() {
                   Register
                 </Button>
 
-                <Typography color="primary.main" mt={3}>
+                <Typography color="primary.main" mt={3} mb={5}>
                   <Link
                     style={{ textDecoration: "none", color: "#FFF" }}
                     to="/login"
